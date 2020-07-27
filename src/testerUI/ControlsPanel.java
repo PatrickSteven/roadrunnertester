@@ -28,6 +28,7 @@ public class ControlsPanel extends JPanel implements IConstants, ActionListener 
 		btnAddFile.setSize(200, 50);
 		btnAddFile.setLocation(10, 10);
 		btnAddFile.addActionListener(this);
+		
 
 		JButton btnRun = new JButton("Run");
 		btnRun.setSize(200, 50);
@@ -39,16 +40,32 @@ public class ControlsPanel extends JPanel implements IConstants, ActionListener 
 	}
 
 	public void actionPerformed(ActionEvent e){  
-		int returnVal = fileSelector.showOpenDialog(this);
+		boolean testFromFolder = true;
+		File folder = new File("D:\\Documentos\\GitHub\\Roadrunner\\src\\Output");
 		
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileSelector.getSelectedFile();
-            fileList.add(file);
-            JLabel fileLabel = new JLabel(fileList.size()+". "+file.getAbsolutePath());
-            fileLabel.setBounds((int)(((WINDOW_WIDTH/2)*0.6)), 10+fileList.size()*20, 800, 20);
-            this.add(fileLabel);
-            this.repaint();
-        }		
+		File[] listOfFiles = folder.listFiles();
+		if(testFromFolder) {
+			for (File file : listOfFiles) {
+			    if (file.isFile()) {
+		            fileList.add(file);
+		            JLabel fileLabel = new JLabel(folder.getAbsolutePath());
+		            this.add(fileLabel);
+		            this.repaint();
+			    }
+			}
+		}
+		else {
+			int returnVal = fileSelector.showOpenDialog(this);
+	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fileSelector.getSelectedFile();
+	            fileList.add(file);
+	            JLabel fileLabel = new JLabel(fileList.size()+". "+file.getAbsolutePath());
+	            fileLabel.setBounds((int)(((WINDOW_WIDTH/2)*0.6)), 10+fileList.size()*20, 800, 20);
+	            this.add(fileLabel);
+	            this.repaint();
+	        }		
+		}
+
 	}  
 	
 	public ArrayList<File> getFiles() {

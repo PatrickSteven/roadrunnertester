@@ -37,8 +37,9 @@ public class TrackPanel extends JPanel implements IConstants {
         	for(RoadRunnerThread runner : runners) {
         		g.setColor(runner.getColor());
         		g.fillOval(runner.getX(), runner.getY(), SIZE, SIZE);
-        		for(Point point : runner.getPath()) {
-        			g.fillRect(point.x, point.y, SIZE, SIZE);
+        		for(int point = 0; point < runner.getPath().size(); point++) {
+        			Point p = runner.getPath().get(point);
+        			g.fillRect(p.x, p.y, SIZE/4, SIZE/4);
         		}
         	}
         }

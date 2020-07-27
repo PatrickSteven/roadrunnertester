@@ -48,6 +48,7 @@ public class RoadRunnerThread extends Thread implements IConstants {
 		        double distance = (instructionTime / SPEED_MILLIS) * SIZE;
 		        Point destinyXY = calculateDestinyPosition(position, distance, angle);
 		        
+		        /*
 	        	System.out.println("*New instruction*");
 	        	System.out.println("\tPoint: (" + position.x + "," + position.y + ")");
 	        	System.out.println("\tPoint: (" + destinyXY.x + "," + destinyXY.y + ")");
@@ -55,9 +56,8 @@ public class RoadRunnerThread extends Thread implements IConstants {
 	        	System.out.println("\tBearingAngle: " + currentBearingAngle );
 	        	System.out.println("\tMagnitude: " + distance);
 	        	System.out.println("\tTime: " + instructionTime);
+	        	*/
 	        	
-
-		        
 
 		        int steps = instructionTime / UPDATE_TIME_MILLIS; // cantidad de actualizaciones a esa velocidad
 		        // para mx + c equation
@@ -86,7 +86,6 @@ public class RoadRunnerThread extends Thread implements IConstants {
 		        	path.add(new Point(position.x, position.y));
 
 		        }	
-	        	System.out.println("\tPosition: (" + position.x + "," + position.y + ")");
 
 		        position.setLocation(destinyXY);
 		    }			
