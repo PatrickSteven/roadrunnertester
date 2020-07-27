@@ -4,6 +4,7 @@ package testerUI;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import tester.*;
@@ -23,12 +25,13 @@ public class TrackWindow extends JFrame implements IConstants, ActionListener, R
 	private ControlsPanel controls;
 	private ArrayList<RoadRunnerThread> runners = new ArrayList<RoadRunnerThread>();
 	private boolean threadActive = false;
+	private JScrollPane scrollPane;
 	
 	public TrackWindow() {
 		super("The Roadrunner Tester");
-		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		this.setPreferredSize(new Dimension(1366, 768));
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    this.setLocation(0, 0);
@@ -37,9 +40,17 @@ public class TrackWindow extends JFrame implements IConstants, ActionListener, R
 	    trackImage = new ImageIcon(getClass().getResource("/pista de carrera.jpg")).getImage();
 	    controls = new ControlsPanel(this);
 	    controls.setLocation(0, 0);
-	    this.add(controls);
-
-	    this.add(new TrackPanel(trackImage, this, runners));
+	    this.add(controls);	
+	    //Scroll Pane 
+	    
+	    TrackPanel trackPanel = new TrackPanel(trackImage, this, runners);
+	    this.scrollPane = new JScrollPane(trackPanel);
+	    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    scrollPane.setBounds(50, 30, 300, 50);
+	    this.add(scrollPane);
+	    
+	    //this.add(new TrackPanel(trackImage, this, runners));
 	    
 	    this.addWindowListener(new WindowAdapter() {
 	    	@Override

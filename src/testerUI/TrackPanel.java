@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -22,7 +23,8 @@ public class TrackPanel extends JPanel implements IConstants {
 		this.mainFrame = pFrame;
 		this.trackImage = pImage;
 		this.runners = pRunners;
-		this.setSize(TRACK_WIDTH, TRACK_WIDTH);
+		//this.setSize(TRACK_WIDTH, TRACK_WIDTH);
+		this.setPreferredSize(new Dimension(TRACK_WIDTH, TRACK_WIDTH));
 		this.setLayout(null);
 	}
 	
@@ -35,6 +37,9 @@ public class TrackPanel extends JPanel implements IConstants {
         	for(RoadRunnerThread runner : runners) {
         		g.setColor(runner.getColor());
         		g.fillOval(runner.getX(), runner.getY(), SIZE, SIZE);
+        		for(Point point : runner.getPath()) {
+        			g.fillRect(point.x, point.y, SIZE, SIZE);
+        		}
         	}
         }
 	}

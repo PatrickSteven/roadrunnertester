@@ -1,5 +1,8 @@
 package tester;
 import testerUI.TrackWindow;
+
+import javax.swing.JScrollPane;
+
 import javafx.scene.transform.*;
 
 public class Tester {
